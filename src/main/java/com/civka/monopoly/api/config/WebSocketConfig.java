@@ -3,7 +3,6 @@ package com.civka.monopoly.api.config;
 import com.civka.monopoly.api.security.jwt.JwtUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.lang.NonNull;
 import org.springframework.messaging.Message;
@@ -31,17 +30,13 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     private final JwtUtils jwtUtils;
     private final UserDetailsService userDetailsService;
 
-    @Value("${monopoly.app.websocket.allowed.origins}")
-    private String allowedOrigins;
-
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        String[] origins = allowedOrigins.split(",");
         registry.addEndpoint("/ws")
-                .setAllowedOrigins(origins)
+                .setAllowedOriginPatterns("*")
                 .withSockJS();
         registry.addEndpoint("/ws")
-                .setAllowedOrigins(origins);
+                .setAllowedOriginPatterns("*");
     }
 
     @Override
