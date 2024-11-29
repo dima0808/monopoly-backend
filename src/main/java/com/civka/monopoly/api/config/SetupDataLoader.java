@@ -41,12 +41,23 @@ public class SetupDataLoader implements
             chatRepository.save(chat);
         }
 
-        if (!userRepository.existsByUsernameOrEmail("admin", "mamchenko2210@gmail.com")) {
+        if (!userRepository.existsByUsernameOrEmail("dimitri", "mamchenko2210@gmail.com")) {
             User user = User.builder()
-                    .username("admin")
-                    .nickname("admin")
+                    .username("dimitri")
+                    .nickname("dimitri")
                     .email("mamchenko2210@gmail.com")
                     .password(passwordEncoder.encode("gk7dlA9grTjpIP12"))
+                    .roles(Set.of(userRole, adminRole))
+                    .build();
+            userRepository.save(user);
+        }
+
+        if (!userRepository.existsByUsernameOrEmail("nazar", "pupikpn@gmail.com")) {
+            User user = User.builder()
+                    .username("nazar")
+                    .nickname("nazar")
+                    .email("pupikpn@gmail.com")
+                    .password(passwordEncoder.encode("trh1fjf7dog228"))
                     .roles(Set.of(userRole, adminRole))
                     .build();
             userRepository.save(user);
